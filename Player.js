@@ -10,7 +10,7 @@ class Player extends EventEmitter {
 		super();
 
 		this.seat = seat;
-		this.role = Role.Unknown;
+		this.roles = [];
 		this.cards = [];
 
 		this.skills = [];
@@ -22,9 +22,26 @@ class Player extends EventEmitter {
 		this.tags = new Set;
 	}
 
-	setRole(role) {
-		this.role = role;
-		this.emit('roleChanged', role);
+	setRoles(roles) {
+		this.roles = roles;
+		this.emit('roleChanged', roles);
+	}
+
+	addRole(role) {
+		this.roles.push(role);
+		this.emit('roleChanged', this.roles);
+	}
+
+	hasRole(role) {
+		return this.roles.includes(role);
+	}
+
+	getRoles() {
+		return this.roles;
+	}
+
+	hasTeam(team) {
+		return this.roles.some(role => role.team === team);
 	}
 
 	isAlive() {

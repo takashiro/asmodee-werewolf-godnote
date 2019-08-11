@@ -8,7 +8,7 @@ class PassiveSkill extends Skill {
 	}
 
 	triggerable(room, target) {
-		return target && target.role == this.role;
+		return target && target.hasRole(this.role);
 	}
 
 	effect(room, target) {

@@ -16,7 +16,7 @@ class WerewolfAttack extends ProactiveSkill {
 	}
 
 	belongsTo(player) {
-		return this.role.team === player.role.team;
+		return player.hasTeam(this.role.team);
 	}
 
 	effect(room, target) {
@@ -38,7 +38,7 @@ class WerewolfExpose extends ProactiveSkill {
 	}
 
 	isValidTarget(target) {
-		return super.isValidTarget(target) && target.role === Role.Werewolf;
+		return super.isValidTarget(target) && target.hasRole(Role.Werewolf);
 	}
 
 	effect(room, target) {

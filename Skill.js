@@ -8,7 +8,7 @@ class Skill {
 	}
 
 	belongsTo(player) {
-		return this.role === player.role;
+		return player.hasRole(this.role);
 	}
 
 }

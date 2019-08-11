@@ -45,11 +45,13 @@ class Room extends EventEmitter {
 
 			const player = this.players[i] = new Player(profile.seat);
 			if (profile.cards) {
-				player.cards = profile.cards.map(role => Role.fromNum(role));
+				player.cards = profile.cards.map(Role.fromNum);
 			}
-			const role = Role.fromNum(profile.role);
-			player.setRole(role);
-			player.loadRoleSkills(role);
+			if (profile.roles) {
+				const roles = profile.roles.map(Role.fromNum);
+				player.setRoles(roles);
+				player.loadRoleSkills();
+			}
 		}
 	}
 

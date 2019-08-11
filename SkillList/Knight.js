@@ -17,7 +17,7 @@ class Duel extends ProactiveSkill {
 
 	effect(room, target) {
 		let loser = target;
-		if (target.role.team !== Team.Werewolf) {
+		if (!target.hasTeam(Team.Werewolf)) {
 			loser = this.owner;
 		}
 
