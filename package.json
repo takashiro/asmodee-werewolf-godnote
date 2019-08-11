@@ -23,5 +23,8 @@
   "homepage": "https://github.com/takashiro/asmodee-werewolf#readme",
   "devDependencies": {
     "eslint": "^6.1.0"
+  },
+  "dependencies": {
+    "events": "^3.0.0"
   }
 }
