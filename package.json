@@ -4,7 +4,7 @@
   "description": "Core Library of Werewolves of Miller's Hollow",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/takashiro/asmodee-werewolf/issues"
   },
-  "homepage": "https://github.com/takashiro/asmodee-werewolf#readme"
+  "homepage": "https://github.com/takashiro/asmodee-werewolf#readme",
+  "devDependencies": {
+    "eslint": "^6.1.0"
+  }
 }
