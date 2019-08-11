@@ -35,24 +35,21 @@ class Room extends EventEmitter {
 		this.emit('day', this.day);
 	}
 
-	loadPlayers(players) {
-		this.players = new Array(players.length);
-		for (let record of players) {
-			let i = record.seat - 1;
+	loadPlayers(profiles) {
+		this.players = new Array(profiles.length);
+		for (const profile of profiles) {
+			let i = profile.seat - 1;
 			if (i < 0 || i >= this.players.length) {
 				continue;
 			}
 
-			let player = this.players[i] = new Player(record.seat);
-			let card = record.card;
-			if (card) {
-				if (card.cards) {
-					player.cards = card.cards.map(role => Role.fromNum(role));
-				}
-				let role = Role.fromNum(card.role);
-				player.setRole(role);
-				player.loadRoleSkills(role);
+			const player = this.players[i] = new Player(profile.seat);
+			if (profile.cards) {
+				player.cards = profile.cards.map(role => Role.fromNum(role));
 			}
+			const role = Role.fromNum(profile.role);
+			player.setRole(role);
+			player.loadRoleSkills(role);
 		}
 	}
 
