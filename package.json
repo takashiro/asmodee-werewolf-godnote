@@ -1,7 +1,7 @@
 {
-  "name": "asmodee-werewolf",
+  "name": "@asmodee/werewolf-simulator",
   "version": "0.1.0",
-  "description": "Core Library of Werewolves of Miller's Hollow",
+  "description": "Simulator of Werewolves of Miller's Hollow",
   "main": "index.js",
   "scripts": {
     "test": "eslint ."

@@ -6,7 +6,7 @@ Werewolves of Miller's Hollow
 | Author       |           Kazuichi Takashiro          |
 
 
-Lisense
+License
 -------
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as
@@ -19,15 +19,15 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU Affero General Public License for more details.
 
 You should have received a copy of the GNU Affero General Public License
-along with this program. If not, see <http://www.gnu.org/licenses/>.
+along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 Introduction
 ------------
 
-It's a small library to provide role cards of the board game Werewolves of Miller's Hollow.
+It's a library to simulate the process of the board game Werewolves of Miller's Hollow.
 
-Running Environment
+Relevant Components
 -------------------
-1. [React Web GUI](https://github.com/takashiro/asmodee-werewolf-react)
-1. [Node.js Server](https://github.com/takashiro/asmodee-werewolf-server)
+1. [RESTful API](https://github.com/takashiro/asmodee-werewolf-server)
+1. [React App](https://github.com/takashiro/asmodee-werewolf-react)
 1. [WeChat App](https://github.com/takashiro/asmodee-werewolf-wechat)
