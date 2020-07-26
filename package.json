@@ -4,7 +4,9 @@
   "description": "Simulator of Werewolves of Miller's Hollow",
   "main": "index.js",
   "scripts": {
-    "test": "eslint ."
+    "build": "tsc",
+    "test": "npm run lint",
+    "lint": "eslint --ext=ts src"
   },
   "repository": {
     "type": "git",
@@ -22,9 +24,14 @@
   },
   "homepage": "https://github.com/takashiro/asmodee-werewolf#readme",
   "devDependencies": {
-    "eslint": "^6.1.0"
+    "@typescript-eslint/eslint-plugin": "^3.7.0",
+    "@typescript-eslint/parser": "^3.7.0",
+    "eslint": "^7.5.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "typescript": "^3.9.7"
   },
   "dependencies": {
-    "events": "^3.0.0"
+    "@asmodee/werewolf-core": "^0.1.0"
   }
 }
