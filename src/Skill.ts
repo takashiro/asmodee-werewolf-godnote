@@ -7,12 +7,13 @@ class Skill {
 
 	protected role: Role;
 
-	protected priority: number;
-
 	constructor(event: GameEvent, role: Role) {
 		this.event = event;
 		this.role = role;
-		this.priority = 0;
+	}
+
+	getRole(): Role {
+		return this.role;
 	}
 }
 
