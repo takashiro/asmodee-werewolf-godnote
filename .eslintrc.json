@@ -25,6 +25,10 @@
 				"js": "never"
 			}
 		],
+		"indent": [
+			"error",
+			"tab"
+		],
 		"linebreak-style": "off",
 		"no-tabs": "off"
 	},

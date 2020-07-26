@@ -32,6 +32,6 @@
     "typescript": "^3.9.7"
   },
   "dependencies": {
-    "@asmodee/werewolf-core": "^0.1.0"
+    "@asmodee/werewolf-core": "^0.1.2"
   }
 }
