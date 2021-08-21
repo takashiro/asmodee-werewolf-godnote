@@ -1,19 +1,12 @@
-import { Role } from '@asmodee/werewolf-core';
+class Skill<Owner> {
+	protected readonly owner: Owner;
 
-import GameEvent from './GameEvent';
-
-class Skill {
-	public readonly event: GameEvent;
-
-	protected role: Role;
-
-	constructor(event: GameEvent, role: Role) {
-		this.event = event;
-		this.role = role;
+	constructor(owner: Owner) {
+		this.owner = owner;
 	}
 
-	getRole(): Role {
-		return this.role;
+	getOwner(): Owner {
+		return this.owner;
 	}
 }
 

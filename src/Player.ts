@@ -5,8 +5,6 @@ import {
 	Teamship,
 } from '@asmodee/werewolf-core';
 
-import Skill from './Skill';
-
 interface Player {
 	on(event: 'roleChanged', listener: (role: Role[]) => void): this;
 	on(event: 'aliveChanged', listener: (alive: boolean) => void): this;
@@ -19,6 +17,10 @@ interface Player {
 	off(event: 'roleChanged', listener: (role: Role[]) => void): this;
 	off(event: 'aliveChanged', listener: (alive: boolean) => void): this;
 	off(event: 'tagChanged', listener: (tags: string[]) => void): this;
+
+	emit(event: 'roleChanged', role: Role[]): boolean;
+	emit(event: 'aliveChanged', alive: boolean): boolean;
+	emit(event: 'tagChanged', tags: string[]): boolean;
 }
 
 class Player extends EventEmitter {
@@ -26,39 +28,22 @@ class Player extends EventEmitter {
 
 	protected role: Role[];
 
-	protected extraRoles: Role[];
+	protected tags: Set<string> = new Set();
 
-	protected tags: Set<string>;
+	protected alive = true;
 
-	protected skills: Skill[];
+	protected deathDate?: number;
 
-	protected alive: boolean;
-
-	protected deathDate: number;
-
-	constructor(seat: number) {
+	constructor(seat: number, role: Role[] = []) {
 		super();
 
 		this.seat = seat;
-		this.role = [];
-		this.extraRoles = [];
-
-		this.skills = [];
-
-		this.alive = true;
-		this.deathDate = 0;
-
-		this.tags = new Set();
+		this.role = role;
 	}
 
 	setRole(role: Role[]): void {
 		this.role = role;
 		this.emit('roleChanged', role);
-	}
-
-	addRole(role: Role): void {
-		this.role.push(role);
-		this.emit('roleChanged', this.role);
 	}
 
 	hasRole(role: Role): boolean {
@@ -82,25 +67,25 @@ class Player extends EventEmitter {
 		this.emit('aliveChanged', alive);
 	}
 
-	addSkill(skill: Skill): void {
-		this.skills.push(skill);
-	}
-
-	addTag(tag: string): void {
-		if (!this.tags.has(tag)) {
-			this.tags.add(tag);
-			this.emit('tagChanged', this.tags);
+	addTag(tag: string): boolean {
+		if (this.tags.has(tag)) {
+			return false;
 		}
+		this.tags.add(tag);
+		this.emit('tagChanged', [...this.tags]);
+		return true;
 	}
 
 	hasTag(tag: string): boolean {
 		return this.tags.has(tag);
 	}
 
-	removeTag(tag: string): void {
-		if (this.tags.delete(tag)) {
-			this.emit('tagChanged', this.tags);
+	removeTag(tag: string): boolean {
+		if (!this.tags.delete(tag)) {
+			return false;
 		}
+		this.emit('tagChanged', [...this.tags]);
+		return true;
 	}
 }
 
