@@ -1,8 +1,7 @@
 import Player from './Player';
 import EventDriver from './EventDriver';
-import GameEvent from './GameEvent';
 
-class Board extends EventDriver<GameEvent> {
+class Board extends EventDriver {
 	protected players: Player[] = [];
 
 	protected day = 1;

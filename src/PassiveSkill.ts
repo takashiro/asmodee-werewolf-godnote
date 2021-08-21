@@ -5,7 +5,7 @@ import Board from './Board';
 import EventListener from './EventListener';
 import GameEvent from './GameEvent';
 
-abstract class PassiveSkill<ParamType> extends Skill implements EventListener<GameEvent, ParamType> {
+abstract class PassiveSkill<ParamType> extends Skill implements EventListener<ParamType> {
 	protected board: Board;
 
 	constructor(board: Board, event: GameEvent, role: Role) {
