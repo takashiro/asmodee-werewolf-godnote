@@ -3,41 +3,28 @@ import EventDriver from './EventDriver';
 import GameEvent from './GameEvent';
 
 class Board extends EventDriver<GameEvent> {
-	protected players: Player[];
+	protected players: Player[] = [];
 
-	protected date: number;
+	protected day = 1;
 
-	constructor() {
-		super();
-		this.players = [];
-		this.date = 0;
-	}
-
-	addPlayer(player: Player): void {
-		this.players.push(player);
-	}
-
-	removePlayer(player: Player): void {
-		const i = this.players.indexOf(player);
-		if (i >= 0) {
-			this.players.splice(i, 1);
-		}
+	setPlayers(players: Player[]): void {
+		this.players = players;
 	}
 
 	getPlayers(): Player[] {
-		return this.players;
+		return [...this.players];
 	}
 
 	getAlivePlayers(): Player[] {
 		return this.players.filter((player) => player.isAlive());
 	}
 
-	tickDate(): void {
-		this.date++;
+	tick(): void {
+		this.day++;
 	}
 
-	getDate(): number {
-		return this.date;
+	getDay(): number {
+		return this.day;
 	}
 }
 
