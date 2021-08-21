@@ -1,4 +1,4 @@
-{
+module.exports = {
 	"env": {
 		"browser": true,
 		"es2020": true,
@@ -37,6 +37,7 @@
 			"error",
 			"WithStatement"
 		],
+		"no-shadow": "off",
 		"no-tabs": "off"
 	},
 	"settings": {

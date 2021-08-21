@@ -1,7 +1,7 @@
 Werewolves of Miller's Hollow
 ==========
 
-| Example Page |    http://werewolf.takashiro.cn       |
+| Example Page |    https://werewolf.takashiro.cn       |
 |--------------|---------------------------------------|
 | Author       |           Kazuichi Takashiro          |
 
@@ -29,5 +29,5 @@ It's a library to simulate the process of the board game Werewolves of Miller's 
 Relevant Components
 -------------------
 1. [RESTful API](https://github.com/takashiro/asmodee-werewolf-server)
-1. [React App](https://github.com/takashiro/asmodee-werewolf-react)
-1. [WeChat App](https://github.com/takashiro/asmodee-werewolf-wechat)
+1. [React Web App](https://github.com/takashiro/asmodee-werewolf-react)
+1. [WeChat Mini-Program](https://github.com/takashiro/asmodee-werewolf-wechat)
