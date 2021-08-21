@@ -1,52 +1,52 @@
 module.exports = {
-	"env": {
-		"browser": true,
-		"es2020": true,
-		"node": true
+	env: {
+		browser: true,
+		es2020: true,
+		node: true,
 	},
-	"extends": [
-		"airbnb-base",
-		"plugin:@typescript-eslint/recommended"
+	extends: [
+		'airbnb-base',
+		'plugin:@typescript-eslint/recommended',
 	],
-	"parser": "@typescript-eslint/parser",
-	"parserOptions": {
-		"ecmaVersion": 11,
-		"sourceType": "module"
+	parser: '@typescript-eslint/parser',
+	parserOptions: {
+		ecmaVersion: 11,
+		sourceType: 'module',
 	},
-	"plugins": [
-		"@typescript-eslint"
+	plugins: [
+		'@typescript-eslint',
 	],
-	"rules": {
-		"import/extensions": [
-			"error",
-			"ignorePackages",
+	rules: {
+		'import/extensions': [
+			'error',
+			'ignorePackages',
 			{
-				"ts": "never",
-				"js": "never"
-			}
+				ts: 'never',
+				js: 'never',
+			},
 		],
-		"indent": [
-			"error",
-			"tab"
+		indent: [
+			'error',
+			'tab',
 		],
-		"linebreak-style": "off",
-		"max-len": "off",
-		"no-await-in-loop": "off",
-		"no-plusplus": "off",
-		"no-restricted-syntax": [
-			"error",
-			"WithStatement"
+		'linebreak-style': 'off',
+		'max-len': 'off',
+		'no-await-in-loop': 'off',
+		'no-plusplus': 'off',
+		'no-restricted-syntax': [
+			'error',
+			'WithStatement',
 		],
-		"no-shadow": "off",
-		"no-tabs": "off"
+		'no-shadow': 'off',
+		'no-tabs': 'off',
 	},
-	"settings": {
-		"import/resolver": {
-			"node": {
-				"extensions": [
-					".ts"
-				]
-			}
-		}
-	}
-}
+	settings: {
+		'import/resolver': {
+			node: {
+				extensions: [
+					'.ts',
+				],
+			},
+		},
+	},
+};

@@ -1,5 +1,5 @@
-import Board from '../src/Board';
-import Player from '../src/Player';
+import Board from '../../src/driver/Board';
+import Player from '../../src/driver/Player';
 
 const board = new Board();
 const players = [

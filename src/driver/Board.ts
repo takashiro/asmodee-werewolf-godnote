@@ -1,5 +1,6 @@
+import EventDriver from '../util/EventDriver';
+
 import Player from './Player';
-import EventDriver from './EventDriver';
 
 class Board extends EventDriver {
 	protected players: Player[] = [];
