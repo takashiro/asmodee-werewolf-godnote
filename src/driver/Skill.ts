@@ -1,11 +1,11 @@
-import GameEvent from './GameEvent';
+import Period from './Period';
 import Player from './Player';
 import SkillEffect from './SkillEffect';
 
 class Skill {
-	protected readonly event: GameEvent;
-
 	protected readonly owner: Player;
+
+	protected readonly period: Period;
 
 	protected priority: number;
 
@@ -13,14 +13,14 @@ class Skill {
 
 	protected effects?: SkillEffect<unknown>[];
 
-	constructor(owner: Player, event: GameEvent, priority = 0) {
-		this.event = event;
+	constructor(owner: Player, period: Period, priority = 0) {
+		this.period = period;
 		this.owner = owner;
 		this.priority = priority;
 	}
 
-	getEvent(): GameEvent {
-		return this.event;
+	getPeriod(): Period {
+		return this.period;
 	}
 
 	getOwner(): Player {

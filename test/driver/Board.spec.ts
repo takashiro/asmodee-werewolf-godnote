@@ -21,7 +21,7 @@ it('filters a live players', () => {
 
 it('starts from Day 1', () => {
 	expect(board.isStarted()).toBe(false);
-	board.tick();
+	board.start();
 	expect(board.isStarted()).toBe(true);
 	expect(board.getDay()).toBe(1);
 });

@@ -3,9 +3,19 @@ import { Role } from '@asmodee/werewolf-core';
 import EventDriver from '../util/EventDriver';
 
 import Collection from './Collection';
+import GameEvent from './GameEvent';
 import Period from './Period';
 import Player from './Player';
 import Skill from './Skill';
+
+const periods: Period[] = [
+	Period.Evening,
+	Period.Night,
+	Period.Dawn,
+	Period.Morning,
+	Period.Day,
+	Period.Dusk,
+];
 
 class Board extends EventDriver {
 	protected collections: Collection[] = [];
@@ -14,7 +24,7 @@ class Board extends EventDriver {
 
 	protected skills: Skill[] = [];
 
-	protected period = Period.Night;
+	protected period = Period.Unknown;
 
 	protected day = 0;
 
@@ -50,10 +60,6 @@ class Board extends EventDriver {
 		return this.day;
 	}
 
-	tick(): void {
-		this.day++;
-	}
-
 	giftPlayer(player: Player, role: Role): void {
 		for (const col of this.getCollections()) {
 			const SkillCreators = col.getSkills(role);
@@ -81,6 +87,24 @@ class Board extends EventDriver {
 				this.giftPlayer(player, role);
 			}
 		}
+		this.day++;
+	}
+
+	tick(): boolean {
+		if (!this.isStarted()) {
+			return false;
+		}
+
+		const cur = periods.indexOf(this.period);
+		const next = cur + 1;
+		if (next < periods.length) {
+			this.period = periods[next];
+		} else {
+			[this.period] = periods;
+			this.day++;
+		}
+		this.trigger(GameEvent.Ticking, this.period);
+		return true;
 	}
 }
 

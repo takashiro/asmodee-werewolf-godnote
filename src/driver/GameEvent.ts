@@ -1,27 +1,25 @@
 enum GameEvent {
 	Invalid,
 
-	// 游戏开始时
-	Start,
+	/**
+	 * 游戏开始时
+	 */
+	Starting,
 
-	// 夜晚
-	Evening,
-	// 夜间
-	Night,
-	// 天亮前
-	Dawn,
+	/**
+	 * 阶段改变时
+	 */
+	Ticking,
 
-	// 早晨
-	Morning,
-	// 白天
-	Day,
-	// 天黑前
-	Dusk,
+	/**
+	 * 玩家濒死前
+	 */
+	BeforeDying,
 
-	// 死亡前
-	Killed,
-	// 死亡时
-	Death,
+	/**
+	 * 玩家濒死时
+	 */
+	Dying,
 }
 
 export default GameEvent;
