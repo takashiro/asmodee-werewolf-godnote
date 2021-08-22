@@ -20,7 +20,8 @@ it('filters a live players', () => {
 });
 
 it('starts from Day 1', () => {
-	expect(board.getDay()).toBe(1);
+	expect(board.isStarted()).toBe(false);
 	board.tick();
-	expect(board.getDay()).toBe(2);
+	expect(board.isStarted()).toBe(true);
+	expect(board.getDay()).toBe(1);
 });
