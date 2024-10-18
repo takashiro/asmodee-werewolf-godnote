@@ -1,6 +1,6 @@
-import Period from './Period';
-import Player from './Player';
-import SkillEffect from './SkillEffect';
+import Period from './Period.js';
+import Player from './Player.js';
+import SkillEffect from './SkillEffect.js';
 
 class Skill {
 	protected readonly owner: Player;

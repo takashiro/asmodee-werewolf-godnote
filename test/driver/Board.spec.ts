@@ -1,5 +1,11 @@
-import Board from '../../src/driver/Board';
-import Player from '../../src/driver/Player';
+import {
+	jest,
+	expect,
+	it,
+} from '@jest/globals';
+
+import Board from '../../src/driver/Board.js';
+import Player from '../../src/driver/Player.js';
 
 const board = new Board();
 const players = [

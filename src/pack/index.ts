@@ -1,4 +1,4 @@
-import Collection from '../driver/Collection';
+import Collection from '../driver/Collection.js';
 
 const collections: Collection[] = [];
 

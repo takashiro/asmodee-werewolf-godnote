@@ -1,5 +1,11 @@
-import EventDriver from '../../src/util/EventDriver';
-import EventListener from '../../src/util/EventListener';
+import {
+	jest,
+	expect,
+	it,
+} from '@jest/globals';
+
+import EventDriver from '../../src/util/EventDriver.js';
+import EventListener from '../../src/util/EventListener.js';
 
 const enum GameEvent {
 	U,

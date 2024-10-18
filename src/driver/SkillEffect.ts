@@ -1,6 +1,6 @@
-import EventListener from '../util/EventListener';
+import EventListener from '../util/EventListener.js';
 
-import Skill from './Skill';
+import Skill from './Skill.js';
 
 export default abstract class SkillEffect<ParamType> extends EventListener<ParamType> {
 	protected readonly skill: Skill;

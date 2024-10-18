@@ -1,7 +1,7 @@
-import EventListener from './EventListener';
+import EventListener from './EventListener.js';
 
 class EventDriver {
-	protected listeners: Map<number, EventListener<unknown>[]> = new Map();
+	protected listeners = new Map<number, EventListener<unknown>[]>();
 
 	register(listener: EventListener<unknown>): void {
 		const listeners = this.listeners.get(listener.event);

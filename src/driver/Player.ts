@@ -28,7 +28,7 @@ class Player extends EventEmitter {
 
 	protected role: Role[];
 
-	protected tags: Set<string> = new Set();
+	protected tags = new Set<string>();
 
 	protected alive = true;
 

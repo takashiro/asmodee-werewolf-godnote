@@ -1,9 +1,14 @@
 import {
+	jest,
+	expect,
+	it,
+} from '@jest/globals';
+import {
 	Role,
 	Team,
 } from '@asmodee/werewolf-core';
 
-import Player from '../../src/driver/Player';
+import Player from '../../src/driver/Player.js';
 
 const player = new Player(8, [Role.AlphaWolf]);
 

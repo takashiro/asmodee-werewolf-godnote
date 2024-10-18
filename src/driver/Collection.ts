@@ -1,7 +1,7 @@
 import { Role } from '@asmodee/werewolf-core';
 
-import Player from './Player';
-import Skill from './Skill';
+import Player from './Player.js';
+import Skill from './Skill.js';
 
 export type SkillCreator = new(owner: Player) => Skill;
 

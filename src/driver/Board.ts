@@ -1,12 +1,12 @@
 import { Role } from '@asmodee/werewolf-core';
 
-import EventDriver from '../util/EventDriver';
+import EventDriver from '../util/EventDriver.js';
 
-import Collection from './Collection';
-import GameEvent from './GameEvent';
-import Period from './Period';
-import Player from './Player';
-import Skill from './Skill';
+import Collection from './Collection.js';
+import GameEvent from './GameEvent.js';
+import Period from './Period.js';
+import Player from './Player.js';
+import Skill from './Skill.js';
 
 const periods: Period[] = [
 	Period.Evening,
@@ -90,7 +90,7 @@ class Board extends EventDriver {
 		this.day++;
 	}
 
-	tick(): boolean {
+	async tick(): Promise<boolean> {
 		if (!this.isStarted()) {
 			return false;
 		}
@@ -103,7 +103,7 @@ class Board extends EventDriver {
 			[this.period] = periods;
 			this.day++;
 		}
-		this.trigger(GameEvent.Ticking, this.period);
+		await this.trigger(GameEvent.Ticking, this.period);
 		return true;
 	}
 }
