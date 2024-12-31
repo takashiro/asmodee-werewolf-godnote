@@ -1,20 +1,12 @@
 import { Role } from '@asmodee/werewolf-core';
 
-import EventDriver from './EventDriver.js';
+import type Collection from './Collection.js';
+import type Player from './Player.js';
+import type Skill from './Skill.js';
 
-import Collection from './Collection.js';
 import Event from './Event.js';
+import EventDriver from './EventDriver.js';
 import Period from './Period.js';
-import Player from './Player.js';
-
-const periods: Period[] = [
-	Period.Evening,
-	Period.Night,
-	Period.Dawn,
-	Period.Morning,
-	Period.Day,
-	Period.Dusk,
-];
 
 class Board extends EventDriver<Event> {
 	protected collections: Collection[] = [];
@@ -88,25 +80,36 @@ class Board extends EventDriver<Event> {
 				this.giftPlayer(player, role);
 			}
 		}
-		this.day++;
-		await this.tick();
+		await this.trigger(Event.GameStarted);
+		await this.sunset();
 	}
 
-	async tick(): Promise<boolean> {
-		if (!this.isStarted()) {
-			return false;
-		}
-
-		const cur = periods.indexOf(this.period);
-		const next = cur + 1;
-		if (next < periods.length) {
-			this.period = periods[next];
+	async tick(): Promise<void> {
+		if (this.period === Period.Day) {
+			await this.sunset();
 		} else {
-			[this.period] = periods;
-			this.day++;
+			await this.sunrise();
 		}
-		await this.trigger(Event.PeriodChanged);
-		return true;
+	}
+
+	async sunset(): Promise<void> {
+		this.day++;
+		await this.trigger(Event.BeforeSunset);
+		this.period = Period.Night;
+		await this.trigger(Event.AfterSunset);
+	}
+
+	async sunrise(): Promise<void> {
+		await this.trigger(Event.BeforeSunrise);
+		for (const player of this.players) {
+			player.clearTags();
+		}
+		this.period = Period.Day;
+		await this.trigger(Event.AfterSunrise);
+	}
+
+	getSkills(): Skill<unknown, Player>[] {
+		return this.players.map((player) => player.getSkills()).flat(1);
 	}
 
 	isPeriodFinished(): boolean {

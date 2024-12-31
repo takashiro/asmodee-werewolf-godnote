@@ -26,15 +26,11 @@ board.setCollections([standard]);
 
 it('starts the game', async () => {
 	await board.start();
-	expect(board.getPeriod()).toBe(Period.Evening);
-	expect(board.isPeriodFinished()).toBe(true);
+	expect(board.getPeriod()).toBe(Period.Night);
+	expect(board.isPeriodFinished()).toBe(false);
 });
 
 it('wakes up werewolves', async () => {
-	await board.tick();
-	expect(board.getPeriod()).toBe(Period.Night);
-	expect(board.isPeriodFinished()).toBe(false);
-
 	const players = board.getPlayers();
 	for (const player of players) {
 		expect(player.isAlive()).toBe(true);
@@ -60,7 +56,7 @@ it('wakes up werewolves', async () => {
 it('goes into dawn', async () => {
 	expect(board.isPeriodFinished()).toBe(true);
 	await board.tick();
-	expect(board.getPeriod()).toBe(Period.Dawn);
+	expect(board.getPeriod()).toBe(Period.Day);
 
 	const victim = board.getPlayer(8)!;
 	expect(victim.isAlive()).toBe(false);

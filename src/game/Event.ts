@@ -1,7 +1,10 @@
 export const enum Event {
 	Invalid,
 	GameStarted,
-	PeriodChanged,
+	BeforeSunset,
+	AfterSunset,
+	BeforeSunrise,
+	AfterSunrise,
 }
 
 export default Event;

@@ -108,6 +108,10 @@ class Player extends EventEmitter {
 		this.emit('tagChanged', [...this.tags]);
 		return true;
 	}
+
+	clearTags(): void {
+		this.tags.clear();
+	}
 }
 
 export default Player;

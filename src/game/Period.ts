@@ -1,13 +1,7 @@
 const enum Period {
 	Unknown,
-
-	Evening,
-	Night,
-	Dawn,
-
-	Morning,
 	Day,
-	Dusk,
+	Night,
 }
 
 export default Period;
