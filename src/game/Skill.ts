@@ -1,54 +1,32 @@
 import Period from './Period.js';
-import Player from './Player.js';
-import SkillEffect from './SkillEffect.js';
+import type EventListener from './EventListener.js';
 
-class Skill {
-	protected readonly owner: Player;
-
-	protected readonly period: Period;
-
-	protected priority: number;
-
-	protected selected: Player[] = [];
-
-	protected effects?: SkillEffect<unknown>[];
-
-	constructor(owner: Player, period: Period, priority = 0) {
-		this.period = period;
-		this.owner = owner;
-		this.priority = priority;
+export abstract class Skill<DriverType, PlayerType> {
+	constructor(
+		protected readonly driver: DriverType,
+		protected readonly owner: PlayerType,
+		protected readonly period: Period,
+	) {
 	}
 
 	getPeriod(): Period {
 		return this.period;
 	}
 
-	getOwner(): Player {
+	getOwner(): PlayerType {
 		return this.owner;
 	}
 
 	getPriority(): number {
-		return this.priority;
+		return 0;
 	}
 
-	filterPlayer(target: Player): boolean {
-		return this.selected.length <= 0 && target.isAlive();
-	}
+	abstract isFeasible(selected: PlayerType[]): boolean;
 
-	isFeasible(): boolean {
-		return this.selected.length === 1;
-	}
+	abstract execute(selected: PlayerType[]): void;
 
-	select(target: Player): void {
-		this.selected.push(target);
-	}
-
-	execute(): void {
-		this.selected = [];
-	}
-
-	getEffects(): SkillEffect<unknown>[] | undefined {
-		return this.effects;
+	getEffects(): EventListener<number, unknown>[] | undefined {
+		return undefined;
 	}
 }
 

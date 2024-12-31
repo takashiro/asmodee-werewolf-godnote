@@ -4,8 +4,8 @@ import {
 	it,
 } from '@jest/globals';
 
-import EventDriver from '../../src/driver/EventDriver.js';
-import EventListener from '../../src/driver/EventListener.js';
+import EventDriver from '../../src/game/EventDriver.js';
+import EventListener from '../../src/game/EventListener.js';
 
 const enum GameEvent {
 	U,
@@ -13,12 +13,8 @@ const enum GameEvent {
 	B,
 }
 
-class Listener extends EventListener<unknown> {
+class Listener extends EventListener<GameEvent, unknown> {
 	protected a = false;
-
-	isTriggerable(): boolean {
-		return this.a;
-	}
 
 	async process(): Promise<boolean> {
 		return this.a;
@@ -30,8 +26,9 @@ const l1 = new Listener(GameEvent.A);
 const l2 = new Listener(GameEvent.B);
 const l3 = new Listener(GameEvent.B);
 
-const process2 = jest.spyOn(l2, 'process');
-const process3 = jest.spyOn(l3, 'process');
+const p1 = jest.spyOn(l1, 'process');
+const p2 = jest.spyOn(l2, 'process');
+const p3 = jest.spyOn(l3, 'process');
 
 it('registers 2 listeners', () => {
 	driver.register(l1);
@@ -40,35 +37,21 @@ it('registers 2 listeners', () => {
 });
 
 it('triggers GameEvent.A', async () => {
-	const ret = await driver.trigger(GameEvent.A);
-	expect(ret).toBe(true);
+	await driver.trigger(GameEvent.A);
+	expect(p1).toHaveBeenCalledTimes(1);
+	expect(p2).not.toHaveBeenCalled();
+	expect(p3).not.toHaveBeenCalled();
+	p1.mockClear();
 });
 
-it('triggers event GameEvent.B', async () => {
-	jest.spyOn(l2, 'isTriggerable').mockReturnValue(true);
-	jest.spyOn(l3, 'isTriggerable').mockReturnValue(true);
+it('triggers GameEvent.B', async () => {
 	const data = { t: 3 };
-	const ret = await driver.trigger(GameEvent.B, data);
-	expect(ret).toBe(true);
-	expect(process2).toBeCalledTimes(1);
-	expect(process2).toBeCalledWith(data);
-	expect(process3).toBeCalledTimes(1);
-	expect(process3).toBeCalledWith(data);
-	process2.mockClear();
-	process3.mockClear();
-});
-
-it('triggers event GameEvent.B and can be stopped', async () => {
-	process2.mockResolvedValue(true);
-	const data = { t: 4 };
-	const ret = await driver.trigger(GameEvent.B, data);
-	expect(ret).toBe(true);
-	expect(process2).toBeCalledTimes(1);
-	expect(process2).toBeCalledWith(data);
-	expect(process3).not.toBeCalled();
-});
-
-it('triggers event GameEvent.U', async () => {
-	const ret = await driver.trigger(GameEvent.U);
-	expect(ret).toBe(false);
+	await driver.trigger(GameEvent.B, data);
+	expect(p1).not.toHaveBeenCalled();
+	expect(p2).toBeCalledTimes(1);
+	expect(p2).toBeCalledWith(data);
+	expect(p3).toBeCalledTimes(1);
+	expect(p3).toBeCalledWith(data);
+	p2.mockClear();
+	p3.mockClear();
 });

@@ -1,9 +1,9 @@
 import EventListener from './EventListener.js';
 
-class EventDriver {
-	protected listeners = new Map<number, EventListener<unknown>[]>();
+export class EventDriver<EventType> {
+	protected listeners = new Map<EventType, EventListener<EventType, unknown>[]>();
 
-	register(listener: EventListener<unknown>): void {
+	register(listener: EventListener<EventType, unknown>): void {
 		const listeners = this.listeners.get(listener.event);
 		if (listeners) {
 			listeners.push(listener);
@@ -12,22 +12,17 @@ class EventDriver {
 		}
 	}
 
-	async trigger<ParamType>(event: number, data?: ParamType): Promise<boolean> {
+	async trigger<ParamType>(event: EventType, data?: ParamType): Promise<void> {
 		const listeners = this.listeners.get(event);
 		if (!listeners || listeners.length <= 0) {
-			return false;
+			return;
 		}
-
 		for (const listener of listeners) {
-			if (listener.isTriggerable(data)) {
-				const prevented = await listener.process(data);
-				if (prevented) {
-					return true;
-				}
+			const prevented = await listener.process(data);
+			if (prevented) {
+				return;
 			}
 		}
-
-		return true;
 	}
 }
 

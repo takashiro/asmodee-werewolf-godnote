@@ -1,9 +1,10 @@
 import { Role } from '@asmodee/werewolf-core';
 
-import Player from './Player.js';
-import Skill from './Skill.js';
+import type Board from './Board.js';
+import type Player from './Player.js';
+import type Skill from './Skill.js';
 
-export type SkillCreator = new(owner: Player) => Skill;
+export type SkillCreator = new(driver: Board, owner: Player) => Skill<Board, Player>;
 
 export default abstract class Collection {
 	protected skills = new Map<Role, SkillCreator[]>();
