@@ -21,9 +21,13 @@ export abstract class Skill<DriverType, PlayerType> {
 		return 0;
 	}
 
+	isFinished(): boolean {
+		return false;
+	}
+
 	abstract isFeasible(selected: PlayerType[]): boolean;
 
-	abstract execute(selected: PlayerType[]): void;
+	abstract execute(selected: PlayerType[]): Promise<void>;
 
 	getEffects(): EventListener<number, unknown>[] | undefined {
 		return undefined;

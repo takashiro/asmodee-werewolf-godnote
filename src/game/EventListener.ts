@@ -5,7 +5,7 @@ export abstract class EventListener<EventType, ParamType> {
 		this.event = event;
 	}
 
-	abstract process(param: ParamType): Promise<boolean>;
+	abstract process(param: ParamType): Promise<void>;
 }
 
 export default EventListener;

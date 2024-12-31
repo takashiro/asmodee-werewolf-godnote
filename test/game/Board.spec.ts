@@ -25,9 +25,9 @@ it('filters a live players', () => {
 	expect(alive).toContain(players[1]);
 });
 
-it('starts from Day 1', () => {
+it('starts from Day 1', async () => {
 	expect(board.isStarted()).toBe(false);
-	board.start();
+	await board.start();
 	expect(board.isStarted()).toBe(true);
 	expect(board.getDay()).toBe(1);
 });

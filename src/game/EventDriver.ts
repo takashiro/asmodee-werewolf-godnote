@@ -18,10 +18,7 @@ export class EventDriver<EventType> {
 			return;
 		}
 		for (const listener of listeners) {
-			const prevented = await listener.process(data);
-			if (prevented) {
-				return;
-			}
+			await listener.process(data);
 		}
 	}
 }

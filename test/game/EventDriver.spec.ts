@@ -14,10 +14,8 @@ const enum GameEvent {
 }
 
 class Listener extends EventListener<GameEvent, unknown> {
-	protected a = false;
-
-	async process(): Promise<boolean> {
-		return this.a;
+	async process(): Promise<void> {
+		// do nothing
 	}
 }
 

@@ -45,6 +45,10 @@ class Board extends EventDriver<Event> {
 		return this.players.filter((player) => player.isAlive());
 	}
 
+	getPlayer(seat: number): Player | undefined {
+		return this.players[seat - 1];
+	}
+
 	getPeriod(): Period {
 		return this.period;
 	}
@@ -78,13 +82,14 @@ class Board extends EventDriver<Event> {
 		}
 	}
 
-	start(): void {
+	async start(): Promise<void> {
 		for (const player of this.getPlayers()) {
 			for (const role of player.getRole()) {
 				this.giftPlayer(player, role);
 			}
 		}
 		this.day++;
+		await this.tick();
 	}
 
 	async tick(): Promise<boolean> {
@@ -100,7 +105,18 @@ class Board extends EventDriver<Event> {
 			[this.period] = periods;
 			this.day++;
 		}
-		await this.trigger(Event.PeriodChanged, this.period);
+		await this.trigger(Event.PeriodChanged);
+		return true;
+	}
+
+	isPeriodFinished(): boolean {
+		for (const player of this.players) {
+			for (const skill of player.getSkills()) {
+				if (skill.getPeriod() === this.period && !skill.isFinished()) {
+					return false;
+				}
+			}
+		}
 		return true;
 	}
 }
