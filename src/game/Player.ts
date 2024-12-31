@@ -4,9 +4,9 @@ import {
 	Team,
 	Teamship,
 } from '@asmodee/werewolf-core';
-import type BaseSkill from './Skill.js';
+import type Skill from './Skill.js';
 
-interface Player {
+export interface Player {
 	on(event: 'roleChanged', listener: (role: Role[]) => void): this;
 	on(event: 'aliveChanged', listener: (alive: boolean) => void): this;
 	on(event: 'tagChanged', listener: (tags: string[]) => void): this;
@@ -24,14 +24,14 @@ interface Player {
 	emit(event: 'tagChanged', tags: string[]): boolean;
 }
 
-type Skill = BaseSkill<unknown, Player>;
+export type PlayerSkill = Skill<unknown, Player>;
 
-class Player extends EventEmitter {
+export class Player extends EventEmitter {
 	protected seat: number;
 
 	protected role: Role[];
 
-	protected skills: Skill[] = [];
+	protected skills: PlayerSkill[] = [];
 
 	protected tags = new Set<string>();
 
@@ -59,19 +59,19 @@ class Player extends EventEmitter {
 		return this.role;
 	}
 
-	getSkills(): Skill[] {
+	getSkills(): PlayerSkill[] {
 		return this.skills;
 	}
 
-	getSkill(index: number): Skill | undefined {
+	getSkill(index: number): PlayerSkill | undefined {
 		return this.skills[index];
 	}
 
-	addSkill(skill: Skill): void {
+	addSkill(skill: PlayerSkill): void {
 		this.skills.push(skill);
 	}
 
-	removeSkill(filter: (skill: Skill) => boolean): void {
+	removeSkill(filter: (skill: PlayerSkill) => boolean): void {
 		this.skills = this.skills.filter((skill) => !filter(skill));
 	}
 

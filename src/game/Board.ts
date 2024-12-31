@@ -1,8 +1,7 @@
 import { Role } from '@asmodee/werewolf-core';
 
 import type Collection from './Collection.js';
-import type Player from './Player.js';
-import type Skill from './Skill.js';
+import type { Player, PlayerSkill } from './Player.js';
 
 import Event from './Event.js';
 import EventDriver from './EventDriver.js';
@@ -108,19 +107,21 @@ class Board extends EventDriver<Event> {
 		await this.trigger(Event.AfterSunrise);
 	}
 
-	getSkills(): Skill<unknown, Player>[] {
-		return this.players.map((player) => player.getSkills()).flat(1);
-	}
-
-	isPeriodFinished(): boolean {
-		for (const player of this.players) {
+	getNextSkill(): PlayerSkill | undefined {
+		let target: PlayerSkill | undefined;
+		let priority = Number.POSITIVE_INFINITY;
+		for (const player of this.getAlivePlayers()) {
 			for (const skill of player.getSkills()) {
-				if (skill.getPeriod() === this.period && !skill.isFinished()) {
-					return false;
+				if (skill.isFinished() || skill.getPeriod() !== this.getPeriod()) {
+					continue;
+				}
+				if (skill.getPriority() < priority) {
+					target = skill;
+					priority = skill.getPriority();
 				}
 			}
 		}
-		return true;
+		return target;
 	}
 }
 
