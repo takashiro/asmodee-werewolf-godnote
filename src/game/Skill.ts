@@ -2,6 +2,8 @@ import Period from './Period.js';
 import type EventListener from './EventListener.js';
 
 export abstract class Skill<DriverType, PlayerType> {
+	protected finished = false;
+
 	constructor(
 		protected readonly driver: DriverType,
 		protected readonly owner: PlayerType,
@@ -22,7 +24,11 @@ export abstract class Skill<DriverType, PlayerType> {
 	}
 
 	isFinished(): boolean {
-		return false;
+		return this.finished;
+	}
+
+	setFinished(finished: boolean): void {
+		this.finished = finished;
 	}
 
 	abstract isFeasible(selected: PlayerType[]): boolean;
