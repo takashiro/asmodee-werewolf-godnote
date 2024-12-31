@@ -4,8 +4,8 @@ import {
 	it,
 } from '@jest/globals';
 
-import EventDriver from '../../src/util/EventDriver.js';
-import EventListener from '../../src/util/EventListener.js';
+import EventDriver from '../../src/driver/EventDriver.js';
+import EventListener from '../../src/driver/EventListener.js';
 
 const enum GameEvent {
 	U,

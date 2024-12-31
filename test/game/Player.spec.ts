@@ -8,7 +8,7 @@ import {
 	Team,
 } from '@asmodee/werewolf-core';
 
-import Player from '../../src/driver/Player.js';
+import Player from '../../src/game/Player.js';
 
 const player = new Player(8, [Role.AlphaWolf]);
 

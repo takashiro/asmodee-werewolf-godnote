@@ -1,4 +1,4 @@
-import EventListener from '../util/EventListener.js';
+import EventListener from '../driver/EventListener.js';
 
 import Skill from './Skill.js';
 

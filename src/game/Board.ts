@@ -1,12 +1,11 @@
 import { Role } from '@asmodee/werewolf-core';
 
-import EventDriver from '../util/EventDriver.js';
+import EventDriver from '../driver/EventDriver.js';
 
 import Collection from './Collection.js';
 import GameEvent from './GameEvent.js';
 import Period from './Period.js';
 import Player from './Player.js';
-import Skill from './Skill.js';
 
 const periods: Period[] = [
 	Period.Evening,
@@ -21,8 +20,6 @@ class Board extends EventDriver {
 	protected collections: Collection[] = [];
 
 	protected players: Player[] = [];
-
-	protected skills: Skill[] = [];
 
 	protected period = Period.Unknown;
 
@@ -69,7 +66,6 @@ class Board extends EventDriver {
 
 			for (const SkillCreator of SkillCreators) {
 				const skill = new SkillCreator(player);
-				this.skills.push(skill);
 
 				const effects = skill.getEffects();
 				if (effects) {

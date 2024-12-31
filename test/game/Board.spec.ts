@@ -4,8 +4,8 @@ import {
 	it,
 } from '@jest/globals';
 
-import Board from '../../src/driver/Board.js';
-import Player from '../../src/driver/Player.js';
+import Board from '../../src/game/Board.js';
+import Player from '../../src/game/Player.js';
 
 const board = new Board();
 const players = [
